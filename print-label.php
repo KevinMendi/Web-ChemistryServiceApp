@@ -1,0 +1,2183 @@
+<?php
+ if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+
+if(!isset($_SESSION['user_id']) || !isset($_SESSION['logged_in_time'])){
+    //User not logged in. Redirect them back to the login.php page.
+    header('Location: sign-in.php');
+    exit;
+}
+
+
+function __autoload($class)
+{
+  require_once "classes/$class.php";
+}
+////////////////////////////////////////////FREE USER
+if (isset($_POST['A4-Size-Free'])) 
+{
+ include_once('includes/label/print-label-getdata-free.php');
+
+//echo $count;
+if($count == 1)
+{
+        
+        header("Location:tcpdf-free/examples/test_1.php?print_id=".urldecode($uid)
+            ."&chem_name=".urldecode($chemicalName)
+            ."&cas_no=".urldecode($casNo)
+            ."&un_no=".urldecode($unNo)
+            ."&reach_no=".urldecode($reachNo)
+            ."&ufi_no=".urldecode($ufiNo)
+            ."&signal_word=".urldecode($signalWordVal)
+            ."&fghs=".urldecode($withGhs[0])
+            ."&hp1=".urldecode($hphrase1)
+            ."&hp2=".urldecode($hphrase2)
+            ."&hp3=".urldecode($hphrase3)
+            ."&hp4=".urldecode($hphrase4)
+            ."&hp5=".urldecode($hphrase5)
+            ."&hp6=".urldecode($hphrase6)
+            ."&pp1=".urldecode($pphrase1)
+            ."&pp2=".urldecode($pphrase2)
+            ."&pp3=".urldecode($pphrase3)
+            ."&pp4=".urldecode($pphrase4)
+            ."&pp5=".urldecode($pphrase5)
+            ."&pp6=".urldecode($pphrase6)
+            ."&pp_prev1=".urldecode($pphrase1_prev)
+            ."&pp_prev2=".urldecode($pphrase2_prev)
+            ."&pp_prev3=".urldecode($pphrase3_prev)
+            ."&pp_prev4=".urldecode($pphrase4_prev)
+            ."&pp_prev5=".urldecode($pphrase5_prev)
+            ."&pp_prev6=".urldecode($pphrase6_prev)
+            ."&pp_resp1=".urldecode($pphrase1_resp)
+            ."&pp_resp2=".urldecode($pphrase2_resp)
+            ."&pp_resp3=".urldecode($pphrase3_resp)
+            ."&pp_resp4=".urldecode($pphrase4_resp)
+            ."&pp_resp5=".urldecode($pphrase5_resp)
+            ."&pp_resp6=".urldecode($pphrase6_resp)
+            ."&pp_storage1=".urldecode($pphrase1_storage)
+            ."&pp_storage2=".urldecode($pphrase2_storage)
+            ."&pp_storage3=".urldecode($pphrase3_storage)
+            ."&pp_storage4=".urldecode($pphrase4_storage)
+            ."&pp_storage5=".urldecode($pphrase5_storage)
+            ."&pp_storage6=".urldecode($pphrase6_storage)
+            ."&pp_disp1=".urldecode($pphrase1_disp)
+            ."&pp_disp2=".urldecode($pphrase2_disp)
+            ."&pp_disp3=".urldecode($pphrase3_disp)
+            ."&pp_disp4=".urldecode($pphrase4_disp)
+            ."&pp_disp5=".urldecode($pphrase5_disp)
+            ."&pp_disp6=".urldecode($pphrase6_disp)
+            
+        );
+}
+//Added 7/2/19
+else if($count == 2)
+{
+    /*
+    header("Location:tcpdf-free/examples/test_2.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&sghs=".urldecode($withGhs[1])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6)."&fl1=".urldecode($hphraseFLang1)."&fl2=".urldecode($hphraseFLang2)."&fl3=".urldecode($hphraseFLang3)."&fl4=".urldecode($hphraseFLang4)."&fl5=".urldecode($hphraseFLang5)."&fl6=".urldecode($hphraseFLang6)."&sl1=".urldecode($hphraseSLang1)."&sl2=".urldecode($hphraseSLang2)."&sl3=".urldecode($hphraseSLang3)."&sl4=".urldecode($hphraseSLang4)."&sl5=".urldecode($hphraseSLang5)."&sl6=".urldecode($hphraseSLang6)."&pfl1=".urldecode($pphraseFLang1)."&pfl2=".urldecode($pphraseFLang2)."&pfl3=".urldecode($pphraseFLang3)."&pfl4=".urldecode($pphraseFLang4)."&pfl5=".urldecode($pphraseFLang5)."&pfl6=".urldecode($pphraseFLang6)."&psl1=".urldecode($pphraseSLang1)."&psl2=".urldecode($pphraseSLang2)."&psl3=".urldecode($pphraseSLang3)."&psl4=".urldecode($pphraseSLang4)."&psl5=".urldecode($pphraseSLang5)."&psl6=".urldecode($pphraseSLang6)."&swl=".urldecode($signalWordLang1)."&sw2=".urldecode($signalWordLang2));
+
+    */
+    header("Location:tcpdf-free/examples/test_2.php?print_id=".urldecode($uid)
+            ."&chem_name=".urldecode($chemicalName)
+            ."&cas_no=".urldecode($casNo)
+            ."&un_no=".urldecode($unNo)
+            ."&reach_no=".urldecode($reachNo)
+            ."&ufi_no=".urldecode($ufiNo)
+            ."&signal_word=".urldecode($signalWordVal)
+            ."&fghs=".urldecode($withGhs[0])
+            ."&sghs=".urldecode($withGhs[1])
+            //."&tghs=".urldecode($withGhs[2])
+            //."&ftghs=".urldecode($withGhs[3])
+            ."&hp1=".urldecode($hphrase1)
+            ."&hp2=".urldecode($hphrase2)
+            ."&hp3=".urldecode($hphrase3)
+            ."&hp4=".urldecode($hphrase4)
+            ."&hp5=".urldecode($hphrase5)
+            ."&hp6=".urldecode($hphrase6)
+            ."&pp1=".urldecode($pphrase1)
+            ."&pp2=".urldecode($pphrase2)
+            ."&pp3=".urldecode($pphrase3)
+            ."&pp4=".urldecode($pphrase4)
+            ."&pp5=".urldecode($pphrase5)
+            ."&pp6=".urldecode($pphrase6)
+            ."&pp_prev1=".urldecode($pphrase1_prev)
+            ."&pp_prev2=".urldecode($pphrase2_prev)
+            ."&pp_prev3=".urldecode($pphrase3_prev)
+            ."&pp_prev4=".urldecode($pphrase4_prev)
+            ."&pp_prev5=".urldecode($pphrase5_prev)
+            ."&pp_prev6=".urldecode($pphrase6_prev)
+            ."&pp_resp1=".urldecode($pphrase1_resp)
+            ."&pp_resp2=".urldecode($pphrase2_resp)
+            ."&pp_resp3=".urldecode($pphrase3_resp)
+            ."&pp_resp4=".urldecode($pphrase4_resp)
+            ."&pp_resp5=".urldecode($pphrase5_resp)
+            ."&pp_resp6=".urldecode($pphrase6_resp)
+            ."&pp_storage1=".urldecode($pphrase1_storage)
+            ."&pp_storage2=".urldecode($pphrase2_storage)
+            ."&pp_storage3=".urldecode($pphrase3_storage)
+            ."&pp_storage4=".urldecode($pphrase4_storage)
+            ."&pp_storage5=".urldecode($pphrase5_storage)
+            ."&pp_storage6=".urldecode($pphrase6_storage)
+            ."&pp_disp1=".urldecode($pphrase1_disp)
+            ."&pp_disp2=".urldecode($pphrase2_disp)
+            ."&pp_disp3=".urldecode($pphrase3_disp)
+            ."&pp_disp4=".urldecode($pphrase4_disp)
+            ."&pp_disp5=".urldecode($pphrase5_disp)
+            ."&pp_disp6=".urldecode($pphrase6_disp)
+            
+        );
+}
+else if($count == 3)
+{
+     header("Location:tcpdf-free/examples/test_3.php?print_id=".urldecode($uid)
+            ."&chem_name=".urldecode($chemicalName)
+            ."&cas_no=".urldecode($casNo)
+            ."&un_no=".urldecode($unNo)
+            ."&reach_no=".urldecode($reachNo)
+            ."&ufi_no=".urldecode($ufiNo)
+            ."&signal_word=".urldecode($signalWordVal)
+            ."&fghs=".urldecode($withGhs[0])
+            ."&sghs=".urldecode($withGhs[1])
+            ."&tghs=".urldecode($withGhs[2])
+            //."&ftghs=".urldecode($withGhs[3])
+            ."&hp1=".urldecode($hphrase1)
+            ."&hp2=".urldecode($hphrase2)
+            ."&hp3=".urldecode($hphrase3)
+            ."&hp4=".urldecode($hphrase4)
+            ."&hp5=".urldecode($hphrase5)
+            ."&hp6=".urldecode($hphrase6)
+            ."&pp1=".urldecode($pphrase1)
+            ."&pp2=".urldecode($pphrase2)
+            ."&pp3=".urldecode($pphrase3)
+            ."&pp4=".urldecode($pphrase4)
+            ."&pp5=".urldecode($pphrase5)
+            ."&pp6=".urldecode($pphrase6)
+            ."&pp_prev1=".urldecode($pphrase1_prev)
+            ."&pp_prev2=".urldecode($pphrase2_prev)
+            ."&pp_prev3=".urldecode($pphrase3_prev)
+            ."&pp_prev4=".urldecode($pphrase4_prev)
+            ."&pp_prev5=".urldecode($pphrase5_prev)
+            ."&pp_prev6=".urldecode($pphrase6_prev)
+            ."&pp_resp1=".urldecode($pphrase1_resp)
+            ."&pp_resp2=".urldecode($pphrase2_resp)
+            ."&pp_resp3=".urldecode($pphrase3_resp)
+            ."&pp_resp4=".urldecode($pphrase4_resp)
+            ."&pp_resp5=".urldecode($pphrase5_resp)
+            ."&pp_resp6=".urldecode($pphrase6_resp)
+            ."&pp_storage1=".urldecode($pphrase1_storage)
+            ."&pp_storage2=".urldecode($pphrase2_storage)
+            ."&pp_storage3=".urldecode($pphrase3_storage)
+            ."&pp_storage4=".urldecode($pphrase4_storage)
+            ."&pp_storage5=".urldecode($pphrase5_storage)
+            ."&pp_storage6=".urldecode($pphrase6_storage)
+            ."&pp_disp1=".urldecode($pphrase1_disp)
+            ."&pp_disp2=".urldecode($pphrase2_disp)
+            ."&pp_disp3=".urldecode($pphrase3_disp)
+            ."&pp_disp4=".urldecode($pphrase4_disp)
+            ."&pp_disp5=".urldecode($pphrase5_disp)
+            ."&pp_disp6=".urldecode($pphrase6_disp)
+            
+        );
+}
+else if($count == 4)
+{
+    header("Location:tcpdf-free/examples/test_4.php?print_id=".urldecode($uid)
+            ."&chem_name=".urldecode($chemicalName)
+            ."&cas_no=".urldecode($casNo)
+            ."&un_no=".urldecode($unNo)
+            ."&reach_no=".urldecode($reachNo)
+            ."&ufi_no=".urldecode($ufiNo)
+            ."&signal_word=".urldecode($signalWordVal)
+            ."&fghs=".urldecode($withGhs[0])
+            ."&sghs=".urldecode($withGhs[1])
+            ."&tghs=".urldecode($withGhs[2])
+            ."&ftghs=".urldecode($withGhs[3])
+            ."&hp1=".urldecode($hphrase1)
+            ."&hp2=".urldecode($hphrase2)
+            ."&hp3=".urldecode($hphrase3)
+            ."&hp4=".urldecode($hphrase4)
+            ."&hp5=".urldecode($hphrase5)
+            ."&hp6=".urldecode($hphrase6)
+            ."&pp1=".urldecode($pphrase1)
+            ."&pp2=".urldecode($pphrase2)
+            ."&pp3=".urldecode($pphrase3)
+            ."&pp4=".urldecode($pphrase4)
+            ."&pp5=".urldecode($pphrase5)
+            ."&pp6=".urldecode($pphrase6)
+            ."&pp_prev1=".urldecode($pphrase1_prev)
+            ."&pp_prev2=".urldecode($pphrase2_prev)
+            ."&pp_prev3=".urldecode($pphrase3_prev)
+            ."&pp_prev4=".urldecode($pphrase4_prev)
+            ."&pp_prev5=".urldecode($pphrase5_prev)
+            ."&pp_prev6=".urldecode($pphrase6_prev)
+            ."&pp_resp1=".urldecode($pphrase1_resp)
+            ."&pp_resp2=".urldecode($pphrase2_resp)
+            ."&pp_resp3=".urldecode($pphrase3_resp)
+            ."&pp_resp4=".urldecode($pphrase4_resp)
+            ."&pp_resp5=".urldecode($pphrase5_resp)
+            ."&pp_resp6=".urldecode($pphrase6_resp)
+            ."&pp_storage1=".urldecode($pphrase1_storage)
+            ."&pp_storage2=".urldecode($pphrase2_storage)
+            ."&pp_storage3=".urldecode($pphrase3_storage)
+            ."&pp_storage4=".urldecode($pphrase4_storage)
+            ."&pp_storage5=".urldecode($pphrase5_storage)
+            ."&pp_storage6=".urldecode($pphrase6_storage)
+            ."&pp_disp1=".urldecode($pphrase1_disp)
+            ."&pp_disp2=".urldecode($pphrase2_disp)
+            ."&pp_disp3=".urldecode($pphrase3_disp)
+            ."&pp_disp4=".urldecode($pphrase4_disp)
+            ."&pp_disp5=".urldecode($pphrase5_disp)
+            ."&pp_disp6=".urldecode($pphrase6_disp)
+            
+        );
+}
+else if($count == 5)
+{
+    header("Location:tcpdf-free/examples/test_5.php?print_id=".urldecode($uid)
+            ."&chem_name=".urldecode($chemicalName)
+            ."&cas_no=".urldecode($casNo)
+            ."&un_no=".urldecode($unNo)
+            ."&reach_no=".urldecode($reachNo)
+            ."&ufi_no=".urldecode($ufiNo)
+
+            ."&signal_word=".urldecode($signalWordVal)
+            ."&fghs=".urldecode($withGhs[0])
+            ."&sghs=".urldecode($withGhs[1])
+            ."&tghs=".urldecode($withGhs[2])
+            ."&ftghs=".urldecode($withGhs[3])
+            ."&fifghs=".urldecode($withGhs[4])
+            ."&hp1=".urldecode($hphrase1)
+            ."&hp2=".urldecode($hphrase2)
+            ."&hp3=".urldecode($hphrase3)
+            ."&hp4=".urldecode($hphrase4)
+            ."&hp5=".urldecode($hphrase5)
+            ."&hp6=".urldecode($hphrase6)
+            ."&pp1=".urldecode($pphrase1)
+            ."&pp2=".urldecode($pphrase2)
+            ."&pp3=".urldecode($pphrase3)
+            ."&pp4=".urldecode($pphrase4)
+            ."&pp5=".urldecode($pphrase5)
+            ."&pp6=".urldecode($pphrase6)
+            ."&pp_prev1=".urldecode($pphrase1_prev)
+            ."&pp_prev2=".urldecode($pphrase2_prev)
+            ."&pp_prev3=".urldecode($pphrase3_prev)
+            ."&pp_prev4=".urldecode($pphrase4_prev)
+            ."&pp_prev5=".urldecode($pphrase5_prev)
+            ."&pp_prev6=".urldecode($pphrase6_prev)
+            ."&pp_resp1=".urldecode($pphrase1_resp)
+            ."&pp_resp2=".urldecode($pphrase2_resp)
+            ."&pp_resp3=".urldecode($pphrase3_resp)
+            ."&pp_resp4=".urldecode($pphrase4_resp)
+            ."&pp_resp5=".urldecode($pphrase5_resp)
+            ."&pp_resp6=".urldecode($pphrase6_resp)
+            ."&pp_storage1=".urldecode($pphrase1_storage)
+            ."&pp_storage2=".urldecode($pphrase2_storage)
+            ."&pp_storage3=".urldecode($pphrase3_storage)
+            ."&pp_storage4=".urldecode($pphrase4_storage)
+            ."&pp_storage5=".urldecode($pphrase5_storage)
+            ."&pp_storage6=".urldecode($pphrase6_storage)
+            ."&pp_disp1=".urldecode($pphrase1_disp)
+            ."&pp_disp2=".urldecode($pphrase2_disp)
+            ."&pp_disp3=".urldecode($pphrase3_disp)
+            ."&pp_disp4=".urldecode($pphrase4_disp)
+            ."&pp_disp5=".urldecode($pphrase5_disp)
+            ."&pp_disp6=".urldecode($pphrase6_disp)
+            
+        );
+}
+else
+{
+echo "<script type='text/javascript'>alert('The chemical data is too much for A4 Size. Please Select Different label Size!')</script>";
+}
+
+}
+//////////////////////////////////////////
+if (isset($_POST['A4-Size'])) {
+
+include_once('includes/label/print-label-getdata.php');
+
+    if(isset($_POST['remember_my_choice']))
+      {
+            include_once('includes/label/setcookie.php');
+      }
+    
+
+//echo $count;
+if($count == 1)
+{
+    
+        /*
+        header("Location:tcpdf/examples/test_1.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+        */
+        header("Location:tcpdf/examples/test_1.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            //"&sghs=".urldecode($withGhs[1]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2)
+        );
+}
+//Added 7/2/19
+else if($count == 2)
+{
+    header("Location:tcpdf/examples/test_2.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else if($count == 3)
+{
+    /*
+    header("Location:tcpdf/examples/test_3.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&sghs=".urldecode($withGhs[1])."&tghs=".urldecode($withGhs[2])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+    */
+
+    header("Location:tcpdf/examples/test_3.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else if($count == 4)
+{
+    /*
+    header("Location:tcpdf/examples/test_4.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&sghs=".urldecode($withGhs[1])."&tghs=".urldecode($withGhs[2])."&ftghs=".urldecode($withGhs[3])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+    */
+
+    header("Location:tcpdf/examples/test_4.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            "&ftghs=".rawurlencode($withGhs[3]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else if($count == 5)
+{
+    /*
+    header("Location:tcpdf/examples/test_5.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&sghs=".urldecode($withGhs[1])."&tghs=".urldecode($withGhs[2])."&ftghs=".urldecode($withGhs[3])."&fighs=".urldecode($withGhs[4])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+    */
+    header("Location:tcpdf/examples/test_5.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            "&ftghs=".rawurlencode($withGhs[3]).
+            "&fifghs=".rawurlencode($withGhs[4]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+            "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else
+{
+     echo "<script type='text/javascript'>alert('The chemical data is too much for A4 Size. Please Select Different label Size!')</script>";
+}
+  
+       
+}
+//////////////////////////////////////////////////////////////A5
+if (isset($_POST['A5-Size'])) {
+  include_once('includes/label/print-label-getdata.php');
+
+     
+       if(isset($_POST['remember_my_choice']))
+      {
+            include_once('includes/label/setcookie.php');
+      }
+    
+
+
+if($count == 1)
+{
+    
+        /*
+        header("Location:tcpdf/examples/test_1.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+        */
+        header("Location:tcpdf_a5/examples/test_1.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            //"&sghs=".urldecode($withGhs[1]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+            "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+//Added 7/2/19
+else if($count == 2)
+{
+    header("Location:tcpdf_a5/examples/test_2.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+            "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else if($count == 3)
+{
+    /*
+    header("Location:tcpdf/examples/test_3.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&sghs=".urldecode($withGhs[1])."&tghs=".urldecode($withGhs[2])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+    */
+
+    header("Location:tcpdf_a5/examples/test_3.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else if($count == 4)
+{
+    /*
+    header("Location:tcpdf/examples/test_4.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&sghs=".urldecode($withGhs[1])."&tghs=".urldecode($withGhs[2])."&ftghs=".urldecode($withGhs[3])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+    */
+
+    header("Location:tcpdf_a5/examples/test_4.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            "&ftghs=".rawurlencode($withGhs[3]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+            "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else if($count == 5)
+{
+    /*
+    header("Location:tcpdf/examples/test_5.php?print_id=".urldecode($uid)."&chem_name=".urldecode($chemicalName)."&cas_no=".urldecode($casNo)."&un_no=".urldecode($unNo)."&signal_word=".urldecode($signalWordVal)."&fghs=".urldecode($withGhs[0])."&sghs=".urldecode($withGhs[1])."&tghs=".urldecode($withGhs[2])."&ftghs=".urldecode($withGhs[3])."&fighs=".urldecode($withGhs[4])."&hp1=".urldecode($hphrase1)."&hp2=".urldecode($hphrase2)."&hp3=".urldecode($hphrase3)."&hp4=".urldecode($hphrase4)."&hp5=".urldecode($hphrase5)."&hp6=".urldecode($hphrase6)."&pp1=".urldecode($pphrase1)."&pp2=".urldecode($pphrase2)."&pp3=".urldecode($pphrase3)."&pp4=".urldecode($pphrase4)."&pp5=".urldecode($pphrase5)."&pp6=".urldecode($pphrase6));
+    */
+    header("Location:tcpdf_a5/examples/test_5.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            "&ftghs=".rawurlencode($withGhs[3]).
+            "&fifghs=".rawurlencode($withGhs[4]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else
+{
+    echo "<script type='text/javascript'>alert('The chemical data is too much for A5 Size. Please Select Different label Size!')</script>";
+}
+   
+       
+}
+//////////////////////////////////////////////////////////////////////////A6
+if (isset($_POST['A6-Size'])) {
+    include_once('includes/label/print-label-getdata.php');
+
+      
+      if(isset($_POST['remember_my_choice']))
+      {
+            include_once('includes/label/setcookie.php');
+      }
+  
+
+
+
+
+
+//echo $count;
+if($count == 1)
+{
+        
+header("Location:tcpdf_a6/examples/test_1.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            //"&sghs=".urldecode($withGhs[1]).
+            //"&tghs=".urldecode($withGhs[2]).
+            //"&ftghs=".urldecode($withGhs[3]).
+            //"&fifghs=".urldecode($withGhs[4]).
+            //"&sixghs=".urldecode($withGhs[5]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+            "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+
+}
+//Added 7/2/19
+else if($count == 2)
+{
+    header("Location:tcpdf_a6/examples/test_2.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            //"&tghs=".urldecode($withGhs[2]).
+            //"&ftghs=".urldecode($withGhs[3]).
+            //"&fifghs=".urldecode($withGhs[4]).
+            //"&sixghs=".urldecode($withGhs[5]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else if($count == 3)
+{
+  header("Location:tcpdf_a6/examples/test_3.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            //"&ftghs=".urldecode($withGhs[3]).
+            //"&fifghs=".urldecode($withGhs[4]).
+            //"&sixghs=".urldecode($withGhs[5]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+            "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+
+}
+else if($count == 4)
+{
+        header("Location:tcpdf_a6/examples/test_4.php?print_id=".rawurlencode($uid).
+            "&chem_name=".rawurlencode($chemicalName).
+            "&cas_no=".rawurlencode($casNo).
+            "&un_no=".rawurlencode($unNo).
+            "&signal_word=".rawurlencode($signalWordVal).
+            "&fghs=".rawurlencode($withGhs[0]).
+            "&sghs=".rawurlencode($withGhs[1]).
+            "&tghs=".rawurlencode($withGhs[2]).
+            "&ftghs=".rawurlencode($withGhs[3]).
+            //"&fifghs=".urldecode($withGhs[4]).
+            //"&sixghs=".urldecode($withGhs[5]).
+            "&lang1=".rawurlencode($fLang_lang['lang']).
+            "&lang2=".rawurlencode($sLang_lang['lang']).
+            "&reach_no=".rawurlencode($reachNo).
+            "&ufi_no=".rawurlencode($ufiNo).
+            /*
+            "&hp1=".urldecode($hphrase1).
+            "&hp2=".urldecode($hphrase2).
+            "&hp3=".urldecode($hphrase3).
+            "&hp4=".urldecode($hphrase4).
+            "&hp5=".urldecode($hphrase5).
+            "&hp6=".urldecode($hphrase6).
+            "&pp1=".urldecode($pphrase1).
+            "&pp2=".urldecode($pphrase2).
+            "&pp3=".urldecode($pphrase3).
+            "&pp4=".urldecode($pphrase4).
+            "&pp5=".urldecode($pphrase5).
+            "&pp6=".urldecode($pphrase6).
+            */
+             "&fl1=".rawurlencode($hphraseFLang1_f).
+            "&fl2=".rawurlencode($hphraseFLang2_f).
+            "&fl3=".rawurlencode($hphraseFLang3_f).
+            "&fl4=".rawurlencode($hphraseFLang4_f).
+            "&fl5=".rawurlencode($hphraseFLang5_f).
+            "&fl6=".rawurlencode($hphraseFLang6_f).
+            "&sl1=".rawurlencode($hphraseSLang1_s).
+            "&sl2=".rawurlencode($hphraseSLang2_s).
+            "&sl3=".rawurlencode($hphraseSLang3_s).
+            "&sl4=".rawurlencode($hphraseSLang4_s).
+            "&sl5=".rawurlencode($hphraseSLang5_s).
+            "&sl6=".rawurlencode($hphraseSLang6_s).
+            "&pfl1=".rawurlencode($pphraseFLang1_f).
+            "&pfl2=".rawurlencode($pphraseFLang2_f).
+            "&pfl3=".rawurlencode($pphraseFLang3_f).
+            "&pfl4=".rawurlencode($pphraseFLang4_f).
+            "&pfl5=".rawurlencode($pphraseFLang5_f).
+            "&pfl6=".rawurlencode($pphraseFLang6_f).
+            "&psl1=".rawurlencode($pphraseSLang1_s).
+            "&psl2=".rawurlencode($pphraseSLang2_s).
+            "&psl3=".rawurlencode($pphraseSLang3_s).
+            "&psl4=".rawurlencode($pphraseSLang4_s).
+            "&psl5=".rawurlencode($pphraseSLang5_s).
+            "&psl6=".rawurlencode($pphraseSLang6_s).
+            //Prevention
+            "&pfl1_prev=".rawurlencode($pphraseFLang1_prev_f).
+            "&pfl2_prev=".rawurlencode($pphraseFLang2_prev_f).
+            "&pfl3_prev=".rawurlencode($pphraseFLang3_prev_f).
+            "&pfl4_prev=".rawurlencode($pphraseFLang4_prev_f).
+            "&pfl5_prev=".rawurlencode($pphraseFLang5_prev_f).
+            "&pfl6_prev=".rawurlencode($pphraseFLang6_prev_f).
+
+            "&psl1_prev=".rawurlencode($pphraseSLang1_prev_s).
+            "&psl2_prev=".rawurlencode($pphraseSLang2_prev_s).
+            "&psl3_prev=".rawurlencode($pphraseSLang3_prev_s).
+            "&psl4_prev=".rawurlencode($pphraseSLang4_prev_s).
+            "&psl5_prev=".rawurlencode($pphraseSLang5_prev_s).
+            "&psl6_prev=".rawurlencode($pphraseSLang6_prev_s).
+            //Response
+            "&pfl1_resp=".rawurlencode($pphraseFLang1_resp_f).
+            "&pfl2_resp=".rawurlencode($pphraseFLang2_resp_f).
+            "&pfl3_resp=".rawurlencode($pphraseFLang3_resp_f).
+            "&pfl4_resp=".rawurlencode($pphraseFLang4_resp_f).
+            "&pfl5_resp=".rawurlencode($pphraseFLang5_resp_f).
+            "&pfl6_resp=".rawurlencode($pphraseFLang6_resp_f).
+
+            "&psl1_resp=".rawurlencode($pphraseSLang1_resp_s).
+            "&psl2_resp=".rawurlencode($pphraseSLang2_resp_s).
+            "&psl3_resp=".rawurlencode($pphraseSLang3_resp_s).
+            "&psl4_resp=".rawurlencode($pphraseSLang4_resp_s).
+            "&psl5_resp=".rawurlencode($pphraseSLang5_resp_s).
+            "&psl6_resp=".rawurlencode($pphraseSLang6_resp_s).
+            //Storage
+            "&pfl1_storage=".rawurlencode($pphraseFLang1_storage_f).
+            "&pfl2_storage=".rawurlencode($pphraseFLang2_storage_f).
+            "&pfl3_storage=".rawurlencode($pphraseFLang3_storage_f).
+            "&pfl4_storage=".rawurlencode($pphraseFLang4_storage_f).
+            "&pfl5_storage=".rawurlencode($pphraseFLang5_storage_f).
+            "&pfl6_storage=".rawurlencode($pphraseFLang6_storage_f).
+
+            "&psl1_storage=".rawurlencode($pphraseSLang1_storage_s).
+            "&psl2_storage=".rawurlencode($pphraseSLang2_storage_s).
+            "&psl3_storage=".rawurlencode($pphraseSLang3_storage_s).
+            "&psl4_storage=".rawurlencode($pphraseSLang4_storage_s).
+            "&psl5_storage=".rawurlencode($pphraseSLang5_storage_s).
+            "&psl6_storage=".rawurlencode($pphraseSLang6_storage_s).
+            //Disposal
+            "&pfl1_disp=".rawurlencode($pphraseFLang1_disp_f).
+            "&pfl2_disp=".rawurlencode($pphraseFLang2_disp_f).
+            "&pfl3_disp=".rawurlencode($pphraseFLang3_disp_f).
+            "&pfl4_disp=".rawurlencode($pphraseFLang4_disp_f).
+            "&pfl5_disp=".rawurlencode($pphraseFLang5_disp_f).
+            "&pfl6_disp=".rawurlencode($pphraseFLang6_disp_f).
+
+            "&psl1_disp=".rawurlencode($pphraseSLang1_disp_s).
+            "&psl2_disp=".rawurlencode($pphraseSLang2_disp_s).
+            "&psl3_disp=".rawurlencode($pphraseSLang3_disp_s).
+            "&psl4_disp=".rawurlencode($pphraseSLang4_disp_s).
+            "&psl5_disp=".rawurlencode($pphraseSLang5_disp_s).
+            "&psl6_disp=".rawurlencode($pphraseSLang6_disp_s).
+
+
+            "&sw1=".rawurlencode($signalWordLang1).
+            "&sw2=".rawurlencode($signalWordLang2));
+}
+else
+{
+        echo "<script type='text/javascript'>alert('The chemical data is too much for A6 Size. Please Select Different label Size!')</script>";
+}
+/*
+else if($count == 5)
+{
+     header("Location:tcpdf_a6/examples/test_5.php?print_id=".urldecode($uid).
+            "&chem_name=".urldecode($chemicalName).
+            "&cas_no=".urldecode($casNo).
+            "&un_no=".urldecode($unNo).
+            "&signal_word=".urldecode($signalWordVal).
+            "&fghs=".urldecode($withGhs[0]).
+            "&sghs=".urldecode($withGhs[1]).
+            "&tghs=".urldecode($withGhs[2]).
+            "&ftghs=".urldecode($withGhs[3]).
+            "&fifghs=".urldecode($withGhs[4]).
+            //"&sixghs=".urldecode($withGhs[5]).
+            "&lang1=".urldecode($fLang_lang['lang']).
+            "&lang2=".urldecode($sLang_lang['lang']).
+        
+            "&fl1=".urldecode($hphraseFLang1).
+            "&fl2=".urldecode($hphraseFLang2).
+            "&fl3=".urldecode($hphraseFLang3).
+            "&fl4=".urldecode($hphraseFLang4).
+            "&fl5=".urldecode($hphraseFLang5).
+            "&fl6=".urldecode($hphraseFLang6).
+            "&sl1=".urldecode($hphraseSLang1).
+            "&sl2=".urldecode($hphraseSLang2).
+            "&sl3=".urldecode($hphraseSLang3).
+            "&sl4=".urldecode($hphraseSLang4).
+            "&sl5=".urldecode($hphraseSLang5).
+            "&sl6=".urldecode($hphraseSLang6).
+            "&pfl1=".urldecode($pphraseFLang1).
+            "&pfl2=".urldecode($pphraseFLang2).
+            "&pfl3=".urldecode($pphraseFLang3).
+            "&pfl4=".urldecode($pphraseFLang4).
+            "&pfl5=".urldecode($pphraseFLang5).
+            "&pfl6=".urldecode($pphraseFLang6).
+            "&psl1=".urldecode($pphraseSLang1).
+            "&psl2=".urldecode($pphraseSLang2).
+            "&psl3=".urldecode($pphraseSLang3).
+            "&psl4=".urldecode($pphraseSLang4).
+            "&psl5=".urldecode($pphraseSLang5).
+            "&psl6=".urldecode($pphraseSLang6).
+            //Prevention
+            "&pfl1_prev=".urldecode($pphraseFLang1_prev).
+            "&pfl2_prev=".urldecode($pphraseFLang2_prev).
+            "&pfl3_prev=".urldecode($pphraseFLang3_prev).
+            "&pfl4_prev=".urldecode($pphraseFLang4_prev).
+            "&pfl5_prev=".urldecode($pphraseFLang5_prev).
+            "&pfl6_prev=".urldecode($pphraseFLang6_prev).
+
+            "&psl1_prev=".urldecode($pphraseSLang1_prev).
+            "&psl2_prev=".urldecode($pphraseSLang2_prev).
+            "&psl3_prev=".urldecode($pphraseSLang3_prev).
+            "&psl4_prev=".urldecode($pphraseSLang4_prev).
+            "&psl5_prev=".urldecode($pphraseSLang5_prev).
+            "&psl6_prev=".urldecode($pphraseSLang6_prev).
+            //Response
+            "&pfl1_resp=".urldecode($pphraseFLang1_resp).
+            "&pfl2_resp=".urldecode($pphraseFLang2_resp).
+            "&pfl3_resp=".urldecode($pphraseFLang3_resp).
+            "&pfl4_resp=".urldecode($pphraseFLang4_resp).
+            "&pfl5_resp=".urldecode($pphraseFLang5_resp).
+            "&pfl6_resp=".urldecode($pphraseFLang6_resp).
+
+            "&psl1_resp=".urldecode($pphraseSLang1_resp).
+            "&psl2_resp=".urldecode($pphraseSLang2_resp).
+            "&psl3_resp=".urldecode($pphraseSLang3_resp).
+            "&psl4_resp=".urldecode($pphraseSLang4_resp).
+            "&psl5_resp=".urldecode($pphraseSLang5_resp).
+            "&psl6_resp=".urldecode($pphraseSLang6_resp).
+            //Storage
+            "&pfl1_storage=".urldecode($pphraseFLang1_storage).
+            "&pfl2_storage=".urldecode($pphraseFLang2_storage).
+            "&pfl3_storage=".urldecode($pphraseFLang3_storage).
+            "&pfl4_storage=".urldecode($pphraseFLang4_storage).
+            "&pfl5_storage=".urldecode($pphraseFLang5_storage).
+            "&pfl6_storage=".urldecode($pphraseFLang6_storage).
+
+            "&psl1_storage=".urldecode($pphraseSLang1_storage).
+            "&psl2_storage=".urldecode($pphraseSLang2_storage).
+            "&psl3_storage=".urldecode($pphraseSLang3_storage).
+            "&psl4_storage=".urldecode($pphraseSLang4_storage).
+            "&psl5_storage=".urldecode($pphraseSLang5_storage).
+            "&psl6_storage=".urldecode($pphraseSLang6_storage).
+            //Disposal
+            "&pfl1_disp=".urldecode($pphraseFLang1_disp).
+            "&pfl2_disp=".urldecode($pphraseFLang2_disp).
+            "&pfl3_disp=".urldecode($pphraseFLang3_disp).
+            "&pfl4_disp=".urldecode($pphraseFLang4_disp).
+            "&pfl5_disp=".urldecode($pphraseFLang5_disp).
+            "&pfl6_disp=".urldecode($pphraseFLang6_disp).
+
+            "&psl1_disp=".urldecode($pphraseSLang1_disp).
+            "&psl2_disp=".urldecode($pphraseSLang2_disp).
+            "&psl3_disp=".urldecode($pphraseSLang3_disp).
+            "&psl4_disp=".urldecode($pphraseSLang4_disp).
+            "&psl5_disp=".urldecode($pphraseSLang5_disp).
+            "&psl6_disp=".urldecode($pphraseSLang6_disp).
+
+
+            "&sw1=".urldecode($signalWordLang1).
+            "&sw2=".urldecode($signalWordLang2));
+}
+else if($count == 6)
+{
+     header("Location:tcpdf_a6/examples/test_6.php?print_id=".urldecode($uid).
+            "&chem_name=".urldecode($chemicalName).
+            "&cas_no=".urldecode($casNo).
+            "&un_no=".urldecode($unNo).
+            "&signal_word=".urldecode($signalWordVal).
+            "&fghs=".urldecode($withGhs[0]).
+            "&sghs=".urldecode($withGhs[1]).
+            "&tghs=".urldecode($withGhs[2]).
+            "&ftghs=".urldecode($withGhs[3]).
+            "&fifghs=".urldecode($withGhs[4]).
+            "&sixghs=".urldecode($withGhs[5]).
+            "&lang1=".urldecode($fLang_lang['lang']).
+            "&lang2=".urldecode($sLang_lang['lang']).
+          
+            "&fl1=".urldecode($hphraseFLang1).
+            "&fl2=".urldecode($hphraseFLang2).
+            "&fl3=".urldecode($hphraseFLang3).
+            "&fl4=".urldecode($hphraseFLang4).
+            "&fl5=".urldecode($hphraseFLang5).
+            "&fl6=".urldecode($hphraseFLang6).
+            "&sl1=".urldecode($hphraseSLang1).
+            "&sl2=".urldecode($hphraseSLang2).
+            "&sl3=".urldecode($hphraseSLang3).
+            "&sl4=".urldecode($hphraseSLang4).
+            "&sl5=".urldecode($hphraseSLang5).
+            "&sl6=".urldecode($hphraseSLang6).
+            "&pfl1=".urldecode($pphraseFLang1).
+            "&pfl2=".urldecode($pphraseFLang2).
+            "&pfl3=".urldecode($pphraseFLang3).
+            "&pfl4=".urldecode($pphraseFLang4).
+            "&pfl5=".urldecode($pphraseFLang5).
+            "&pfl6=".urldecode($pphraseFLang6).
+            "&psl1=".urldecode($pphraseSLang1).
+            "&psl2=".urldecode($pphraseSLang2).
+            "&psl3=".urldecode($pphraseSLang3).
+            "&psl4=".urldecode($pphraseSLang4).
+            "&psl5=".urldecode($pphraseSLang5).
+            "&psl6=".urldecode($pphraseSLang6).
+            //Prevention
+            "&pfl1_prev=".urldecode($pphraseFLang1_prev).
+            "&pfl2_prev=".urldecode($pphraseFLang2_prev).
+            "&pfl3_prev=".urldecode($pphraseFLang3_prev).
+            "&pfl4_prev=".urldecode($pphraseFLang4_prev).
+            "&pfl5_prev=".urldecode($pphraseFLang5_prev).
+            "&pfl6_prev=".urldecode($pphraseFLang6_prev).
+
+            "&psl1_prev=".urldecode($pphraseSLang1_prev).
+            "&psl2_prev=".urldecode($pphraseSLang2_prev).
+            "&psl3_prev=".urldecode($pphraseSLang3_prev).
+            "&psl4_prev=".urldecode($pphraseSLang4_prev).
+            "&psl5_prev=".urldecode($pphraseSLang5_prev).
+            "&psl6_prev=".urldecode($pphraseSLang6_prev).
+            //Response
+            "&pfl1_resp=".urldecode($pphraseFLang1_resp).
+            "&pfl2_resp=".urldecode($pphraseFLang2_resp).
+            "&pfl3_resp=".urldecode($pphraseFLang3_resp).
+            "&pfl4_resp=".urldecode($pphraseFLang4_resp).
+            "&pfl5_resp=".urldecode($pphraseFLang5_resp).
+            "&pfl6_resp=".urldecode($pphraseFLang6_resp).
+
+            "&psl1_resp=".urldecode($pphraseSLang1_resp).
+            "&psl2_resp=".urldecode($pphraseSLang2_resp).
+            "&psl3_resp=".urldecode($pphraseSLang3_resp).
+            "&psl4_resp=".urldecode($pphraseSLang4_resp).
+            "&psl5_resp=".urldecode($pphraseSLang5_resp).
+            "&psl6_resp=".urldecode($pphraseSLang6_resp).
+            //Storage
+            "&pfl1_storage=".urldecode($pphraseFLang1_storage).
+            "&pfl2_storage=".urldecode($pphraseFLang2_storage).
+            "&pfl3_storage=".urldecode($pphraseFLang3_storage).
+            "&pfl4_storage=".urldecode($pphraseFLang4_storage).
+            "&pfl5_storage=".urldecode($pphraseFLang5_storage).
+            "&pfl6_storage=".urldecode($pphraseFLang6_storage).
+
+            "&psl1_storage=".urldecode($pphraseSLang1_storage).
+            "&psl2_storage=".urldecode($pphraseSLang2_storage).
+            "&psl3_storage=".urldecode($pphraseSLang3_storage).
+            "&psl4_storage=".urldecode($pphraseSLang4_storage).
+            "&psl5_storage=".urldecode($pphraseSLang5_storage).
+            "&psl6_storage=".urldecode($pphraseSLang6_storage).
+            //Disposal
+            "&pfl1_disp=".urldecode($pphraseFLang1_disp).
+            "&pfl2_disp=".urldecode($pphraseFLang2_disp).
+            "&pfl3_disp=".urldecode($pphraseFLang3_disp).
+            "&pfl4_disp=".urldecode($pphraseFLang4_disp).
+            "&pfl5_disp=".urldecode($pphraseFLang5_disp).
+            "&pfl6_disp=".urldecode($pphraseFLang6_disp).
+
+            "&psl1_disp=".urldecode($pphraseSLang1_disp).
+            "&psl2_disp=".urldecode($pphraseSLang2_disp).
+            "&psl3_disp=".urldecode($pphraseSLang3_disp).
+            "&psl4_disp=".urldecode($pphraseSLang4_disp).
+            "&psl5_disp=".urldecode($pphraseSLang5_disp).
+            "&psl6_disp=".urldecode($pphraseSLang6_disp).
+
+
+            "&sw1=".urldecode($signalWordLang1).
+            "&sw2=".urldecode($signalWordLang2));
+}
+*/
+
+       
+}
+
+
+
+?>

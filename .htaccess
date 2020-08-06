@@ -1,0 +1,9 @@
+#ErrorDocument 404 https://chemistryservice.rimpido.com/404.php
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} ^/404/$
+RewriteRule ^(.*)$ <YourRelativePathToPHPFile>/404.php [L]
+
+#Alternate default index page
+DirectoryIndex index2.php
